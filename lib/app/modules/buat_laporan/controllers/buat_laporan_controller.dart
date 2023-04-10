@@ -14,7 +14,7 @@ class BuatLaporanController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser;
   final box = GetStorage();
-
+  RxString dropdownValue = 'Jalan dan trotoar'.obs;
   final image = Rx<File?>(null);
   final kategoriC = TextEditingController();
   final lokasiC = TextEditingController();
@@ -60,7 +60,7 @@ class BuatLaporanController extends GetxController {
 
   String getCurrentDateTime() {
     var now = DateTime.now();
-    var formatter = DateFormat('yyyy-MM-dd HH:mm');
+    var formatter = DateFormat('dd MMM yyyy');
     return formatter.format(now);
   }
 
@@ -80,14 +80,15 @@ class BuatLaporanController extends GetxController {
       await laporan.add({
         "foto": baset64Img,
         "id_pelapor": user!.uid,
-        "kategori_laporan": kategoriC.text,
+        "kategori_laporan": dropdownValue.value,
         "keterangan": keteranganC.text,
         "latitude": _lat,
         "longitude": _lng,
         "lokasi": lokasiC.text,
         "nama_pelapor": nama,
         "status": "Menunggu",
-        "tgl_lapor": tglLaporTimestamp
+        "tgl_lapor": getCurrentDateTime().toString(),
+        "timestamp": tglLaporTimestamp
       });
 
       Fluttertoast.showToast(

@@ -13,6 +13,7 @@ class BuatLaporanView extends GetView<BuatLaporanController> {
             child: Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             width: Get.width,
@@ -23,22 +24,45 @@ class BuatLaporanView extends GetView<BuatLaporanController> {
             ),
           ),
           Container(
+              margin: EdgeInsets.only(bottom: 5), child: Text("Jenis Laporan")),
+          Container(
             width: Get.width,
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 2),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10), color: Colors.black12),
-            child: TextField(
-              controller: controller.kategoriC,
-              decoration: InputDecoration(
-                labelStyle: TextStyle(fontSize: 13.0),
-                hintStyle: TextStyle(fontSize: 11.0),
-                border: InputBorder.none,
-                hintText: 'Jenis Kerusakan',
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+            child: Obx(
+              () => DropdownButton<String>(
+                isExpanded: true,
+                value: controller.dropdownValue.value,
+                style: TextStyle(fontSize: 13.0, color: Colors.black54),
+                onChanged: (String? newValue) {
+                  print(newValue);
+                  controller.dropdownValue.value = newValue ?? '';
+                },
+                items: <String>[
+                  'Jalan dan trotoar',
+                  'Lampu jalan',
+                  'Drainase dan saluran air',
+                  'Taman dan area publik',
+                  'Fasilitas kesehatan',
+                  'Fasilitas pendidikan',
+                  'Sampah dan lingkungan',
+                  'Fasilitas transportasi umum',
+                  'Listrik, air, dan gas',
+                  'Hewan liar dan keselamatan lalu lintas'
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
               ),
             ),
           ),
           SizedBox(height: 15),
+          Container(
+              margin: EdgeInsets.only(bottom: 5),
+              child: Text("Keterangan Laporan")),
           Container(
             width: Get.width,
             decoration: BoxDecoration(
@@ -49,13 +73,16 @@ class BuatLaporanView extends GetView<BuatLaporanController> {
                 labelStyle: TextStyle(fontSize: 13.0),
                 hintStyle: TextStyle(fontSize: 11.0),
                 border: InputBorder.none,
-                hintText: 'Keterangan Laporan ',
+                hintText: 'Isi Keterangan Laporan ',
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
               ),
             ),
           ),
           SizedBox(height: 15),
+          Container(
+              margin: EdgeInsets.only(bottom: 5),
+              child: Text("Lokasi Laporan")),
           Container(
             width: Get.width,
             height: 120,
@@ -68,13 +95,15 @@ class BuatLaporanView extends GetView<BuatLaporanController> {
                 hintStyle: TextStyle(fontSize: 11.0),
                 border: InputBorder.none,
                 hintText:
-                    'Lokasi Kerusakan (isi dengan alamat, jalan, nomor dan sebagainya)',
+                    'Isi Lokasi (isi dengan alamat, jalan, nomor dan sebagainya)',
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
               ),
             ),
           ),
           SizedBox(height: 15),
+          Container(
+              margin: EdgeInsets.only(bottom: 5), child: Text("Foto Laporan")),
           Container(
               width: Get.width,
               height: 300,
@@ -122,9 +151,20 @@ class BuatLaporanView extends GetView<BuatLaporanController> {
               onPressed: () async {
                 await controller.sendLaporan();
               },
-              child: Text("Kirim Laporan"),
+              child: Text(
+                "Kirim Laporan",
+                style: TextStyle(
+                  fontSize: 16, // Set the text size to 20
+                ),
+              ),
               style: ElevatedButton.styleFrom(
+                minimumSize: Size(double.infinity, 40),
                 backgroundColor: Color(0xff1A669D),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10), // Set the border radius to 20
+                  ),
+                ),
               ),
             ),
           )

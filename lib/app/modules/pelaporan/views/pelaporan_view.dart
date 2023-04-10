@@ -24,6 +24,17 @@ class PelaporanView extends GetView<PelaporanController> {
               color: Colors.black, fontSize: 30, fontWeight: FontWeight.w700),
           automaticallyImplyLeading: false,
         ),
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Color(0xff1A669D),
+          onPressed: () {
+            Get.toNamed(Routes.BUAT_LAPORAN);
+          },
+          label: Text(
+            'LAPOR!',
+            style: TextStyle(fontWeight: FontWeight.w900),
+          ),
+          icon: Icon(Icons.campaign),
+        ),
         body: StreamBuilder<QuerySnapshot>(
           stream: controller.laporanStream,
           builder:
