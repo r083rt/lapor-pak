@@ -16,15 +16,6 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> items = [
-      'Item 1',
-      'Item 2',
-      'Item 3',
-      'Item 4',
-      'Item 5'
-    ];
-    Size size = MediaQuery.of(context).size;
-
     return Scaffold(
         body: FutureBuilder<DocumentSnapshot<Object?>>(
             future: controller.getData(),
@@ -33,9 +24,7 @@ class HomeView extends GetView<HomeController> {
                 return Center(child: CircularProgressIndicator());
               }
               var data = snapshot.data!.data() as Map<String, dynamic>;
-              // box.write('uid', 'GetX is the best');
               controller.saveState(data["nama"]);
-
               Uint8List _bytesImage;
               String _imgString = data['foto'];
               _bytesImage = Base64Decoder().convert(_imgString);
@@ -45,7 +34,7 @@ class HomeView extends GetView<HomeController> {
                 padding: EdgeInsets.all(20),
                 child: Column(
                   children: [
-                    SizedBox(height: size.width * .1),
+                    SizedBox(height: Get.width * .1),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -61,19 +50,24 @@ class HomeView extends GetView<HomeController> {
                                     fontSize: 30, fontWeight: FontWeight.w700))
                           ],
                         ),
-                        ClipOval(
-                          child: Image.memory(
-                            _bytesImage,
-                            fit: BoxFit.cover,
-                            width: 70, // Set the width of the image
-                            height: 70, // Set the height of the image
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed(Routes.USER_PROFILE);
+                          },
+                          child: ClipOval(
+                            child: Image.memory(
+                              _bytesImage,
+                              fit: BoxFit.cover,
+                              width: 70, // Set the width of the image
+                              height: 70, // Set the height of the image
+                            ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                     SizedBox(height: 20),
                     Container(
-                      width: size.width,
+                      width: Get.width,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30.0),
                         color: Color(0xffEEF6FC),
@@ -94,7 +88,7 @@ class HomeView extends GetView<HomeController> {
                     ),
                     SizedBox(height: 40),
                     Container(
-                        width: size.width,
+                        width: Get.width,
                         child: Text(
                           "Info Layanan",
                           textAlign: TextAlign.start,
@@ -185,7 +179,7 @@ class HomeView extends GetView<HomeController> {
                     ),
                     SizedBox(height: 40),
                     Container(
-                        width: size.width,
+                        width: Get.width,
                         child: Text(
                           "Antrian DisdukCapil",
                           textAlign: TextAlign.start,
@@ -267,18 +261,77 @@ class HomeView extends GetView<HomeController> {
                             ),
                           ),
                           Container(
-                            width: 300.0,
+                            width: 330.0,
+                            padding: EdgeInsets.all(10),
                             margin: EdgeInsets.only(right: 15),
                             decoration: BoxDecoration(
-                                color: Color(0xff1A669D),
-                                borderRadius: BorderRadius.circular(20)),
+                                color: Color(0xffE09F1F).withOpacity(.14),
+                                borderRadius: BorderRadius.circular(30)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width: 80,
+                                  margin: EdgeInsets.only(right: 15),
+                                  decoration: BoxDecoration(
+                                      color: Color(0xffE09F1F),
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "12",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w900,
+                                            fontSize: 30,
+                                            color: Colors.white),
+                                      ),
+                                      Text("Antrian",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 17,
+                                              color: Colors.white))
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  width: 200,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Antrian Saat Ini",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 15,
+                                              color: Colors.black)),
+                                      SizedBox(height: 10),
+                                      Text("Konsultasi dan KIA",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 25,
+                                              color: Colors.black)),
+                                      SizedBox(height: 10),
+                                      Text("Antrian Tutup Sabtu/Minggu",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w300,
+                                              fontSize: 14,
+                                              color: Colors.black))
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
                     // SizedBox(height: 40),
                     Container(
-                        width: size.width,
+                        width: Get.width,
                         child: Text(
                           "Update Info E-KTP  ",
                           textAlign: TextAlign.start,
@@ -289,7 +342,7 @@ class HomeView extends GetView<HomeController> {
                         )),
                     SizedBox(height: 20),
                     Container(
-                      width: size.width,
+                      width: Get.width,
                       // height: 100,
                       decoration: BoxDecoration(
                           boxShadow: [
@@ -313,11 +366,19 @@ class HomeView extends GetView<HomeController> {
                               SizedBox(height: 17),
                               Row(
                                 children: [
-                                  Icon(Icons.visibility),
+                                  Icon(
+                                    Icons.visibility,
+                                    color: Colors.black26,
+                                  ),
                                   SizedBox(
                                     width: 10,
                                   ),
-                                  Text("400")
+                                  Text(
+                                    "400",
+                                    style: TextStyle(
+                                        color: Colors.black26,
+                                        fontWeight: FontWeight.bold),
+                                  )
                                 ],
                               )
                             ],
@@ -329,11 +390,12 @@ class HomeView extends GetView<HomeController> {
               ));
             }),
         bottomNavigationBar: ConvexAppBar(
+          initialActiveIndex: 2,
           backgroundColor: Color(0xff1A669D),
           items: [
             TabItem(icon: Icons.home, title: 'Home'),
             TabItem(icon: Icons.help_center, title: 'Bantuan'),
-            // TabItem(icon: Icons.announcement, title: 'Lapor'),
+            TabItem(icon: Icons.campaign, title: 'Lapor'),
             TabItem(icon: Icons.phone, title: 'Kontak'),
             TabItem(icon: Icons.notifications, title: 'Notifikasi'),
           ],
@@ -344,8 +406,10 @@ class HomeView extends GetView<HomeController> {
             } else if (i == 1) {
               Get.toNamed(Routes.BANTUAN);
             } else if (i == 2) {
-              Get.toNamed(Routes.KONTAK);
+              Get.toNamed(Routes.PELAPORAN);
             } else if (i == 3) {
+              Get.toNamed(Routes.KONTAK);
+            } else if (i == 4) {
               Get.toNamed(Routes.NOTIFIKASI);
             }
           },

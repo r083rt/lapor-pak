@@ -21,11 +21,6 @@ class LoginView extends GetView<LoginController> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 160),
-            // Container(
-            //     margin: EdgeInsets.only(bottom: 40),
-            //     // width: 150,
-            //     // height: 150,
-            //     child: Image.asset('assets/logo.png')),
             Text(
               "LAPOR PAK!",
               textAlign: TextAlign.center,
@@ -43,7 +38,6 @@ class LoginView extends GetView<LoginController> {
                     Container(
                       width: size.width,
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30.0),
                         color: Colors.grey[300],
                       ),
                       child: TextField(
@@ -62,7 +56,6 @@ class LoginView extends GetView<LoginController> {
                     Container(
                         width: size.width,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.0),
                           color: Colors.grey[300],
                         ),
                         child: Obx(
@@ -96,14 +89,14 @@ class LoginView extends GetView<LoginController> {
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 fixedSize: Size(200, 50),
-                                shape: StadiumBorder(),
+                                // shape: StadiumBorder(),
                                 backgroundColor: Color(0xff1A669D)),
                             onPressed: () {
                               controller.isLoading(true);
                               authC.login(controller.emailC.text,
                                   controller.passC.text);
                             },
-                            child: Text("Log In"))),
+                            child: Text("Masuk"))),
                     SizedBox(height: 30),
                     InkWell(
                       onTap: () {
@@ -138,7 +131,7 @@ class LoginView extends GetView<LoginController> {
                       children: [
                         Text("Belum punya akun ? "),
                         InkWell(
-                          onTap: () => Get.offAllNamed(Routes.SIGNUP),
+                          onTap: () => Get.toNamed(Routes.REGISTER),
                           child: Text(
                             "daftar",
                             style: TextStyle(

@@ -14,9 +14,6 @@ class PelaporanController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser;
   final box = GetStorage();
-  final Stream<QuerySnapshot> laporanStream = FirebaseFirestore.instance
-      .collection('laporan')
-      // .limit(20)
-      // .orderBy('timestamp', descending: true)
-      .snapshots();
+  final Stream<QuerySnapshot> laporanStream =
+      FirebaseFirestore.instance.collection('laporan').limit(20).snapshots();
 }

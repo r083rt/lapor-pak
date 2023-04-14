@@ -5,8 +5,8 @@ class LoginController extends GetxController {
   var hidePass = true.obs;
   var isLoading = false.obs;
 
-  final emailC = TextEditingController(text: "rsjamsuar@gmail.com");
-  final passC = TextEditingController(text: "123123");
+  final emailC = TextEditingController();
+  final passC = TextEditingController();
 
   @override
   void onClose() {

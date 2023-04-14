@@ -14,6 +14,7 @@ abstract class Routes {
   static const PELAPORAN = _Paths.PELAPORAN;
   static const BUAT_LAPORAN = _Paths.BUAT_LAPORAN;
   static const DETAIL_LAPORAN = _Paths.DETAIL_LAPORAN;
+  static const USER_PROFILE = _Paths.USER_PROFILE;
 }
 
 abstract class _Paths {
@@ -29,4 +30,5 @@ abstract class _Paths {
   static const PELAPORAN = '/pelaporan';
   static const BUAT_LAPORAN = '/buat-laporan';
   static const DETAIL_LAPORAN = '/detail-laporan';
+  static const USER_PROFILE = '/user-profile';
 }
