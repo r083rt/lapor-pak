@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 import 'package:lapor_pak/app/controllers/auth_controller.dart';
 
@@ -12,6 +12,7 @@ import '../controllers/user_profile_controller.dart';
 class UserProfileView extends GetView<UserProfileController> {
   UserProfileView({Key? key}) : super(key: key);
   final authC = Get.find<AuthController>();
+  final UserProfileController controller = Get.put(UserProfileController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,15 +37,34 @@ class UserProfileView extends GetView<UserProfileController> {
                       child: Padding(
                     padding: EdgeInsets.all(40),
                     child: Column(children: [
-                      ClipOval(
-                        child: Image.memory(
-                          _bytesImage,
-                          fit: BoxFit.cover,
-                          width: Get.width * .35, // Set the width of the image
-                          height:
-                              Get.width * .35, // Set the height of the image
-                        ),
-                      ),
+                      InkWell(
+                          onTap: () {
+                            controller.getImage();
+                          },
+                          child: Stack(
+                            children: [
+                              ClipOval(
+                                child: Image.memory(
+                                  _bytesImage,
+                                  fit: BoxFit.cover,
+                                  width: Get.width *
+                                      .35, // Set the width of the image
+                                  height: Get.width *
+                                      .35, // Set the height of the image
+                                ),
+                              ),
+                              Positioned(
+                                top: 100,
+                                left: 0,
+                                right: 0,
+                                child: Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.white.withOpacity(.5),
+                                  size: 50,
+                                ),
+                              ),
+                            ],
+                          )),
                       SizedBox(height: 30),
                       Text(
                         data['nama'],

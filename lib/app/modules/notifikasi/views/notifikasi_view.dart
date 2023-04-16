@@ -7,20 +7,66 @@ import 'package:lapor_pak/app/routes/app_pages.dart';
 import '../controllers/notifikasi_controller.dart';
 
 class NotifikasiView extends GetView<NotifikasiController> {
-  const NotifikasiView({Key? key}) : super(key: key);
+  NotifikasiView({Key? key}) : super(key: key);
+  NotifikasiController controller = Get.put(NotifikasiController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('NotifikasiView'),
-          centerTitle: true,
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          title: Text("Notifikasi",
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black)),
         ),
-        body: const Center(
-          child: Text(
-            'NotifikasiView is working',
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
+        body: Obx(() => ListView.builder(
+              itemCount: controller.users.length,
+              itemBuilder: (context, index) {
+                final user = controller.users[index];
+                return Container(
+                  margin: EdgeInsets.only(right: 15, left: 15, bottom: 15),
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            spreadRadius: 3,
+                            blurRadius: 9,
+                            offset: Offset(0, 6) // changes position of shadow
+                            ),
+                      ],
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Row(children: [
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          color: Colors.pink.withOpacity(.1),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Icon(
+                        Icons.message,
+                        color: Colors.pink,
+                        size: 30,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Column(
+                      children: [Text(user['name']), Text(user['email'])],
+                    )
+                  ]),
+                );
+                // ListTile(
+                //   title: Text(user['name']),
+                //   subtitle: Text(user['email']),
+                // );
+              },
+            )),
         bottomNavigationBar: ConvexAppBar(
           initialActiveIndex: 4,
           backgroundColor: Color(0xff1A669D),
