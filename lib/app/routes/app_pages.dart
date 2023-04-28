@@ -2,12 +2,22 @@ import 'package:get/get.dart';
 
 import '../modules/bantuan/bindings/bantuan_binding.dart';
 import '../modules/bantuan/views/bantuan_view.dart';
+import '../modules/berita/bindings/berita_binding.dart';
+import '../modules/berita/views/berita_view.dart';
+import '../modules/berita_detail/bindings/berita_detail_binding.dart';
+import '../modules/berita_detail/views/berita_detail_view.dart';
 import '../modules/buat_laporan/bindings/buat_laporan_binding.dart';
 import '../modules/buat_laporan/views/buat_laporan_view.dart';
 import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
 import '../modules/detail_laporan/bindings/detail_laporan_binding.dart';
 import '../modules/detail_laporan/views/detail_laporan_view.dart';
+import '../modules/diskusi/bindings/diskusi_binding.dart';
+import '../modules/diskusi/views/diskusi_view.dart';
+import '../modules/diskusi_create/bindings/diskusi_create_binding.dart';
+import '../modules/diskusi_create/views/diskusi_create_view.dart';
+import '../modules/diskusi_detail/bindings/diskusi_detail_binding.dart';
+import '../modules/diskusi_detail/views/diskusi_detail_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/kontak/bindings/kontak_binding.dart';
@@ -92,6 +102,31 @@ class AppPages {
       name: _Paths.USER_PROFILE,
       page: () => UserProfileView(),
       binding: UserProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.BERITA,
+      page: () => BeritaView(),
+      binding: BeritaBinding(),
+    ),
+    GetPage(
+      name: _Paths.BERITA_DETAIL,
+      page: () => BeritaDetailView(),
+      binding: BeritaDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.DISKUSI,
+      page: () => DiskusiView(),
+      binding: DiskusiBinding(),
+    ),
+    GetPage(
+      name: _Paths.DISKUSI_DETAIL,
+      page: () => DiskusiDetailView(),
+      binding: DiskusiDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.DISKUSI_CREATE,
+      page: () => DiskusiCreateView(),
+      binding: DiskusiCreateBinding(),
     ),
   ];
 }

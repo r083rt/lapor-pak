@@ -43,16 +43,23 @@ class UserProfileView extends GetView<UserProfileController> {
                           },
                           child: Stack(
                             children: [
-                              ClipOval(
-                                child: Image.memory(
-                                  _bytesImage,
-                                  fit: BoxFit.cover,
-                                  width: Get.width *
-                                      .35, // Set the width of the image
-                                  height: Get.width *
-                                      .35, // Set the height of the image
-                                ),
-                              ),
+                              data['foto'] != ''
+                                  ? ClipOval(
+                                      child: Image.memory(
+                                        _bytesImage,
+                                        fit: BoxFit.cover,
+                                        width: Get.width *
+                                            .35, // Set the width of the image
+                                        height: Get.width *
+                                            .35, // Set the height of the image
+                                      ),
+                                    )
+                                  : Image.asset(
+                                      'assets/profile.png', fit: BoxFit.cover,
+                                      width: Get.width *
+                                          .35, // Set the width of the image
+                                      height: Get.width * .35,
+                                    ),
                               Positioned(
                                 top: 100,
                                 left: 0,

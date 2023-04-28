@@ -15,6 +15,11 @@ abstract class Routes {
   static const BUAT_LAPORAN = _Paths.BUAT_LAPORAN;
   static const DETAIL_LAPORAN = _Paths.DETAIL_LAPORAN;
   static const USER_PROFILE = _Paths.USER_PROFILE;
+  static const BERITA = _Paths.BERITA;
+  static const BERITA_DETAIL = _Paths.BERITA_DETAIL;
+  static const DISKUSI = _Paths.DISKUSI;
+  static const DISKUSI_DETAIL = _Paths.DISKUSI_DETAIL;
+  static const DISKUSI_CREATE = _Paths.DISKUSI_CREATE;
 }
 
 abstract class _Paths {
@@ -31,4 +36,9 @@ abstract class _Paths {
   static const BUAT_LAPORAN = '/buat-laporan';
   static const DETAIL_LAPORAN = '/detail-laporan';
   static const USER_PROFILE = '/user-profile';
+  static const BERITA = '/berita';
+  static const BERITA_DETAIL = '/berita-detail';
+  static const DISKUSI = '/diskusi';
+  static const DISKUSI_DETAIL = '/diskusi-detail';
+  static const DISKUSI_CREATE = '/diskusi-create';
 }

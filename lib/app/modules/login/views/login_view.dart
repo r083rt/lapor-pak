@@ -20,13 +20,19 @@ class LoginView extends GetView<LoginController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 160),
+            SizedBox(height: 60),
+            Image.asset(
+              'assets/logo.png',
+              width: 120,
+              height: 120,
+            ),
+            SizedBox(height: 10),
             Text(
               "LAPOR PAK!",
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: "FredokaOne",
-                  fontSize: 30,
+                  fontSize: 17,
                   fontWeight: FontWeight.w900,
                   color: Color(0xff1A669D)),
             ),

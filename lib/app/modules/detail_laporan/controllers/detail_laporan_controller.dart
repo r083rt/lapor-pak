@@ -9,12 +9,6 @@ class DetailLaporanController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final Map arguments = Get.arguments;
 
-  late MapController _mapController;
-  List<Marker> _markers = [];
-
-  OpenRouteService openrouteservice = OpenRouteService(
-      apiKey: '5b3ce3597851110001cf6248468b96d1d3ee4ba59391bbf90e2cdd9a');
-
   Future<DocumentSnapshot<Object?>> getData() async {
     String docID = arguments['id'];
 

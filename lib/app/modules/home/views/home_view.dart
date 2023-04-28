@@ -55,12 +55,17 @@ class HomeView extends GetView<HomeController> {
                             Get.toNamed(Routes.USER_PROFILE);
                           },
                           child: ClipOval(
-                            child: Image.memory(
-                              _bytesImage,
-                              fit: BoxFit.cover,
-                              width: 70, // Set the width of the image
-                              height: 70, // Set the height of the image
-                            ),
+                            child: data['foto'] != ''
+                                ? Image.memory(
+                                    _bytesImage,
+                                    fit: BoxFit.cover,
+                                    width: 70, // Set the width of the image
+                                    height: 70, // Set the height of the image
+                                  )
+                                : Image.asset('assets/profile.png',
+                                    fit: BoxFit.cover,
+                                    width: 70, // Set the width of the image
+                                    height: 70),
                           ),
                         )
                       ],
@@ -143,7 +148,9 @@ class HomeView extends GetView<HomeController> {
                             width: 80,
                             // height: 80,
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Get.toNamed(Routes.DISKUSI);
+                              },
                               child: Column(
                                 children: [
                                   Image.asset('assets/dimas.png'),
@@ -161,7 +168,9 @@ class HomeView extends GetView<HomeController> {
                             width: 80,
                             // height: 80,
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Get.toNamed(Routes.BERITA);
+                              },
                               child: Column(
                                 children: [
                                   Image.asset('assets/news.png'),

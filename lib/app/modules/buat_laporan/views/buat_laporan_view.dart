@@ -68,6 +68,8 @@ class BuatLaporanView extends GetView<BuatLaporanController> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10), color: Colors.black12),
             child: TextField(
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
               controller: controller.keteranganC,
               decoration: InputDecoration(
                 labelStyle: TextStyle(fontSize: 13.0),

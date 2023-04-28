@@ -1,39 +1,19 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class NotifikasiController extends GetxController {
-  RxList users = [].obs;
+  final user = FirebaseAuth.instance.currentUser;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  void fetchUsers() async {
-    final jsonString = '''
-      [
-        {
-          "id": 1,
-          "name": "John Doe",
-          "email": "johndoe@example.com"
-        },
-        {
-          "id": 2,
-          "name": "Jane Doe",
-          "email": "janedoe@example.com"
-        },
-        {
-          "id": 3,
-          "name": "Bob Smith",
-          "email": "bobsmith@example.com"
-        }
-      ]
-    ''';
-
-    final List<dynamic> jsonList = json.decode(jsonString);
-    users.assignAll(jsonList);
-  }
+  final Stream<QuerySnapshot> notifStream =
+      FirebaseFirestore.instance.collection('notifikasi').limit(20).snapshots();
 
   final count = 0.obs;
   @override
   void onInit() {
-    fetchUsers();
     super.onInit();
   }
 
