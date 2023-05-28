@@ -20,6 +20,9 @@ abstract class Routes {
   static const DISKUSI = _Paths.DISKUSI;
   static const DISKUSI_DETAIL = _Paths.DISKUSI_DETAIL;
   static const DISKUSI_CREATE = _Paths.DISKUSI_CREATE;
+  static const DISDUKCAPIL = _Paths.DISDUKCAPIL;
+  static const DISDUKCAPIL_FORM = _Paths.DISDUKCAPIL_FORM;
+  static const SETTING_AKUN = _Paths.SETTING_AKUN;
 }
 
 abstract class _Paths {
@@ -41,4 +44,7 @@ abstract class _Paths {
   static const DISKUSI = '/diskusi';
   static const DISKUSI_DETAIL = '/diskusi-detail';
   static const DISKUSI_CREATE = '/diskusi-create';
+  static const DISDUKCAPIL = '/disdukcapil';
+  static const DISDUKCAPIL_FORM = '/disdukcapil-form';
+  static const SETTING_AKUN = '/setting-akun';
 }

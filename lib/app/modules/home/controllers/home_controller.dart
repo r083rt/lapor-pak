@@ -9,18 +9,39 @@ class HomeController extends GetxController {
   final searchC = TextEditingController();
   final user = FirebaseAuth.instance.currentUser;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  List<String> myList = [
+    "disdukcapil",
+    "pelaporan",
+    "dimas",
+    "news",
+    "ktp",
+    "berita"
+  ];
+  String searchString = "";
+
   GetStorage box = GetStorage();
+
+  void search() {
+    final s = myList.contains(searchString);
+    print(s);
+  }
 
   void saveState(String nama) {
     box.write('nama', nama);
   }
 
-  Future<DocumentSnapshot<Object?>> getData() async {
+  Stream<DocumentSnapshot<Object?>> getData() {
     DocumentReference docRef = firestore.collection("users").doc(user!.uid);
 
-    print(docRef);
+    return docRef.snapshots();
+  }
 
-    return docRef.get();
+  Stream<DocumentSnapshot<Object?>> ktpUpdate() {
+    DocumentReference docRef =
+        firestore.collection("disdukcapil").doc(user!.uid);
+
+    return docRef.snapshots();
   }
 
   @override

@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 import 'package:lapor_pak/app/controllers/auth_controller.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/user_profile_controller.dart';
 
 class UserProfileView extends GetView<UserProfileController> {
@@ -22,8 +23,8 @@ class UserProfileView extends GetView<UserProfileController> {
           elevation: 0,
         ),
         body: SingleChildScrollView(
-            child: FutureBuilder<DocumentSnapshot<Object?>>(
-                future: controller.getData(),
+            child: StreamBuilder<DocumentSnapshot<Object?>>(
+                stream: controller.getData(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
@@ -82,7 +83,9 @@ class UserProfileView extends GetView<UserProfileController> {
                       ),
                       SizedBox(height: 60),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed(Routes.SETTING_AKUN);
+                        },
                         child: Container(
                           padding: EdgeInsets.all(15),
                           decoration: BoxDecoration(

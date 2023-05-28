@@ -3,20 +3,59 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lapor_pak/app/controllers/auth_controller.dart';
 
-class UserProfileController extends GetxController {
+class SettingAkunController extends GetxController {
   final user = FirebaseAuth.instance.currentUser;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   AuthController auth = AuthController();
   final image = Rx<File?>(null);
 
+  RxBool isEdit = false.obs;
+  final nama = TextEditingController();
+  final telp = TextEditingController();
+  final nik = TextEditingController();
+  final alamat = TextEditingController();
+  final tempat = TextEditingController();
+  final tgllahir = TextEditingController();
+
   Stream<DocumentSnapshot<Object?>> getData() {
     DocumentReference docRef = firestore.collection("users").doc(user!.uid);
 
     return docRef.snapshots();
+  }
+
+  Future<void> saveEdit() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user!.uid)
+          .update({
+        'nama': nama.text,
+        'no_telp': telp.text,
+        'nik': nik.text,
+        'alamat': alamat.text,
+        'tempat_lahir': tempat.text,
+        'tgl_lahir': tgllahir.text
+      }).then((_) {
+        Get.defaultDialog(
+          title: 'Berhasil',
+          middleText: 'Data berhasil diperbarui',
+        );
+        getData();
+        isEdit.value = false; // Set isEdit back to false after saving changes
+      }).catchError((error) {
+        Get.defaultDialog(
+          title: 'Gagal',
+          middleText: 'Gagal memperbarui data',
+        );
+      });
+    } catch (error) {
+      print('Error: $error');
+    }
   }
 
   Future<void> getImage() async {

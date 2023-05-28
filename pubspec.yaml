@@ -36,5 +36,6 @@ flutter:
     - assets/logo.png
     - assets/profile.png
     - assets/diskusi.jpeg
+    - assets/ktp.png
 
   uses-material-design: true

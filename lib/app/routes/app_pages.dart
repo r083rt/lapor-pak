@@ -12,6 +12,10 @@ import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
 import '../modules/detail_laporan/bindings/detail_laporan_binding.dart';
 import '../modules/detail_laporan/views/detail_laporan_view.dart';
+import '../modules/disdukcapil/bindings/disdukcapil_binding.dart';
+import '../modules/disdukcapil/views/disdukcapil_view.dart';
+import '../modules/disdukcapil_form/bindings/disdukcapil_form_binding.dart';
+import '../modules/disdukcapil_form/views/disdukcapil_form_view.dart';
 import '../modules/diskusi/bindings/diskusi_binding.dart';
 import '../modules/diskusi/views/diskusi_view.dart';
 import '../modules/diskusi_create/bindings/diskusi_create_binding.dart';
@@ -30,6 +34,8 @@ import '../modules/pelaporan/bindings/pelaporan_binding.dart';
 import '../modules/pelaporan/views/pelaporan_view.dart';
 import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
+import '../modules/setting_akun/bindings/setting_akun_binding.dart';
+import '../modules/setting_akun/views/setting_akun_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/user_profile/bindings/user_profile_binding.dart';
@@ -127,6 +133,21 @@ class AppPages {
       name: _Paths.DISKUSI_CREATE,
       page: () => DiskusiCreateView(),
       binding: DiskusiCreateBinding(),
+    ),
+    GetPage(
+      name: _Paths.DISDUKCAPIL,
+      page: () => DisdukcapilView(),
+      binding: DisdukcapilBinding(),
+    ),
+    GetPage(
+      name: _Paths.DISDUKCAPIL_FORM,
+      page: () => DisdukcapilFormView(),
+      binding: DisdukcapilFormBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTING_AKUN,
+      page: () => SettingAkunView(),
+      binding: SettingAkunBinding(),
     ),
   ];
 }

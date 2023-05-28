@@ -16,9 +16,17 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> myList = [
+      "disdukcapil",
+      "pelaporan",
+      "dimas",
+      "news",
+      "ktp",
+      "berita"
+    ];
     return Scaffold(
-        body: FutureBuilder<DocumentSnapshot<Object?>>(
-            future: controller.getData(),
+        body: StreamBuilder<DocumentSnapshot<Object?>>(
+            stream: controller.getData(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
@@ -71,26 +79,37 @@ class HomeView extends GetView<HomeController> {
                       ],
                     ),
                     SizedBox(height: 20),
-                    Container(
-                      width: Get.width,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30.0),
-                        color: Color(0xffEEF6FC),
-                      ),
-                      child: TextField(
-                        controller: controller.searchC,
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.search),
-                          suffixIcon: Icon(Icons.tune),
-                          labelStyle: TextStyle(fontSize: 13.0),
-                          hintStyle: TextStyle(fontSize: 11.0),
-                          border: InputBorder.none,
-                          hintText: 'Cari info layanan',
-                          contentPadding: EdgeInsets.symmetric(
-                              horizontal: 18.0, vertical: 16.0),
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   width: Get.width,
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(30.0),
+                    //     color: Color(0xffEEF6FC),
+                    //   ),
+                    //   child: TextField(
+                    //     // onChanged: (value) {
+                    //     //   showModalBottomSheet(
+                    //     //     context: context,
+                    //     //     builder: (BuildContext context) {
+                    //     //       return Container(
+                    //     //         // Add your widget content here
+                    //     //         child: Text('Modal Bottom Sheet'),
+                    //     //       );
+                    //     //     },
+                    //     //   );
+                    //     // },
+                    //     controller: controller.searchC,
+                    //     decoration: InputDecoration(
+                    //       prefixIcon: Icon(Icons.search),
+                    //       suffixIcon: Icon(Icons.tune),
+                    //       labelStyle: TextStyle(fontSize: 13.0),
+                    //       hintStyle: TextStyle(fontSize: 11.0),
+                    //       border: InputBorder.none,
+                    //       hintText: 'Cari info layanan',
+                    //       contentPadding: EdgeInsets.symmetric(
+                    //           horizontal: 18.0, vertical: 16.0),
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(height: 40),
                     Container(
                         width: Get.width,
@@ -110,7 +129,9 @@ class HomeView extends GetView<HomeController> {
                             width: 80,
                             // height: 80,
                             child: InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Get.toNamed(Routes.DISDUKCAPIL);
+                              },
                               child: Column(
                                 children: [
                                   Image.asset('assets/dukcapil.png'),
@@ -339,60 +360,94 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ),
                     // SizedBox(height: 40),
-                    Container(
-                        width: Get.width,
-                        child: Text(
-                          "Update Info E-KTP  ",
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        )),
-                    SizedBox(height: 20),
-                    Container(
-                      width: Get.width,
-                      // height: 100,
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.3),
-                                spreadRadius: 3,
-                                blurRadius: 9,
-                                offset:
-                                    Offset(0, 6) // changes position of shadow
+
+                    StreamBuilder<DocumentSnapshot<Object?>>(
+                        stream: controller.ktpUpdate(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(child: CircularProgressIndicator());
+                          }
+
+                          if (snapshot.data!.data() != null) {
+                            var data =
+                                snapshot.data!.data() as Map<String, dynamic>;
+
+                            return Column(
+                              children: [
+                                Container(
+                                    width: Get.width,
+                                    child: Text(
+                                      "Update Info E-KTP  ",
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    )),
+                                SizedBox(height: 20),
+                                Container(
+                                  width: Get.width,
+                                  // height: 100,
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.grey.withOpacity(0.3),
+                                            spreadRadius: 3,
+                                            blurRadius: 9,
+                                            offset: Offset(0,
+                                                6) // changes position of shadow
+                                            ),
+                                      ],
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(30)),
+                                  child: Padding(
+                                      padding: EdgeInsets.all(26),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text("Status pembuatan KTP-EL Anda",
+                                              style: TextStyle(
+                                                  fontSize: 20, height: 1.6)),
+                                          SizedBox(height: 17),
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                Icons.work_history_outlined,
+                                                color:
+                                                    data['status'] == 'Selesai'
+                                                        ? Colors.green[600]
+                                                        : Colors.black54,
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text(
+                                                data['status'],
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    color: data['status'] ==
+                                                            'Selesai'
+                                                        ? Colors.green[600]
+                                                        : Colors.black54,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      )),
                                 ),
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Padding(
-                          padding: EdgeInsets.all(26),
-                          child: Column(
-                            children: [
-                              Text(
-                                  "KTP-EL yang telah tercetak hari ini, 7 April 2023",
-                                  style: TextStyle(fontSize: 20, height: 1.6)),
-                              SizedBox(height: 17),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.visibility,
-                                    color: Colors.black26,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    "400",
-                                    style: TextStyle(
-                                        color: Colors.black26,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              )
-                            ],
-                          )),
-                    ),
+                              ],
+                            );
+                          } else {
+                            return SizedBox();
+                          }
+                        }),
+
                     SizedBox(height: 30),
                   ],
                 ),
